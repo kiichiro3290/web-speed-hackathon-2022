@@ -1,5 +1,6 @@
 import { EntitySchema } from "typeorm";
 
+// 正規化できる?
 class RaceEntry {
   static schema = new EntitySchema({
     columns: {

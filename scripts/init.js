@@ -8,11 +8,14 @@ import { insertPlayers } from "./players";
 import { insertRaceEntries } from "./raceEntries";
 import { insertRaces } from "./races";
 
+
+// めちゃくちゃ実行に時間がかかってそう
 async function run() {
   // 開始直後・終了直前でも過去のレースや未来のレースがあるように、期間前後1日余分に用意
   const startDate = process.argv[2] ?? "2022-10-26";
   const endDate = process.argv[3] ?? "2022-11-28";
 
+  // データベースもフロントで持っている？？
   await rm(DATABASE_PATH, { force: true });
   const file = await open(DATABASE_PATH, "w");
   await file.close();
@@ -20,6 +23,8 @@ async function run() {
   const connection = await createConnection();
   await connection.synchronize(true);
 
+  // ここら辺が地獄そう
+  // 最初に実行する必要性があるのか??
   await insertPlayers();
   await insertRaces(startDate, endDate);
   await insertRaceEntries();
