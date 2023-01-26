@@ -2,7 +2,14 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+}
+
 
 function abs(...args) {
   return path.join(__dirname, ...args);
@@ -102,3 +109,4 @@ module.exports = [
     target: "node",
   },
 ];
+
